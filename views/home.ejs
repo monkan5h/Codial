@@ -1,0 +1,133 @@
+<link rel="stylesheet" href="/css/chat.css" />
+<script src="./js/home_like_script.js"></script>
+<script src="./js/home_comment_script.js"></script>
+<script src="./js/home_post_script.js"></script>
+<script>
+  $(" .toggle-like-button").each(function () {
+    let self = this;
+    new ToggleLike(self);
+  });
+</script>
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.0/socket.io.js"
+  integrity="sha512-/xb5+PNOA079FJkngKI2jvID5lyiqdHXaUUcfmzE0X0BdpkgzIWHC59LOG90a2jDcOyRsd1luOr24UCCAG8NNw=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer"
+></script>
+
+<!-- Here below file will be used at client side as socket subscriber in socket cycle -->
+<script type="text/javascript" src="/js/chat_engine_script.js"></script>
+<% if( locals.user ){ %>
+<!-- Chat Engine Script -->
+<script>
+  new ChatEngine(
+    "user-chat-box",
+    `<%= locals.user.email %>`,
+    "<%= locals.user.name %>",
+    "<%= locals.env.ip %>"
+  );
+</script>
+<% } %>
+
+<div class="row">
+  <% if (locals.user) { %>
+  <div id="feed-posts" class="col-md-9">
+    <!-- Form for creating post -->
+    <div class="mb-3 border border-primary rounded p-3">
+      <h4>What's on your mind? <%= locals.user.name %></h4>
+      <form
+        action="/post/createPost"
+        method="post"
+        id="new-post-form"
+        name="myform"
+      >
+        <div class="form-floating mb-2">
+          <textarea
+            name="content"
+            class="form-control shadow-sm border border-1 border-primary rounded shadow-primary"
+            placeholder="Leave a comment here"
+            id="floatingTextarea2"
+            style="height: 70px"
+            required
+          ></textarea>
+          <label for="floatingTextarea2">Write a post :)</label>
+        </div>
+        <button type="submit" class="btn btn-primary">Post</button>
+      </form>
+    </div>
+    <!-- Container for posts -->
+    <div id="post-list-container">
+      <ul style="list-style-type: none; margin: 0px; padding: 0px">
+        <% for (post of posts) { %> <%- include('__post.ejs') %> <% } %>
+      </ul>
+    </div>
+  </div>
+  <% } %>
+
+  <!-- Website info -->
+  <% if(! locals.user ){ %>
+  <div class="col-md-12">
+    <div class="card text-center">
+      <h1 class="card-header bg-danger" style="color: white">Codial</h1>
+      <div class="card-body text-danger">
+        <h3 class="card-title text-danger">Social Media Platform</h3>
+        <p class="card-text fs-4">
+          A social media website where user can create/delete post, comment,
+          like.<br />
+          User can also add/remove friends and chat with others.
+          <hr />
+          This website is developed using NodeJS, Express.JS and MongoDB
+        </p>
+      </div>
+    </div>
+  </div>
+  <% } %>
+  
+  
+  <div id="user-section" class="col-md-3" >
+    <!-- Container for all friends list -->
+    <% if(locals.friends.length>0) {%>
+    <div id="friends" class="card border border-primary">
+      <div class="card-header text-primary">
+        <h4>Friends</h4>
+      </div>
+      <ul class="list-group list-group-flush">
+        <% for (f of friends) { %>
+        <li class="list-group-item d-flex justify-content-between">
+            <a href="/user/profile/<%= f.userFriend.id %>" class=" text-primary text-decoration-none"><%= f.userFriend.name %></a
+            >
+            <a
+              href="/friendship/delete/?id=<%= f.userFriend.id %>"
+              class="delete_friendship float-right   text-danger text-decoration-none"
+              >
+              <i class="fa-solid fa-circle-xmark"></i>
+              </a
+            >
+        </li>
+        <% } %>
+      </ul>
+    </div>
+    <hr class="text-primary"/>
+    <% } %>
+    <% if( locals.user ){ %>
+    <!-- Container for all users list -->
+    <div id="users" class="card border border-primary" >
+      <div class="card-header text-primary">
+        <h4>Users</h4>
+      </div>
+      <ul class="list-group list-group-flush">
+        <% for (user of users) { %>
+        <li class="list-group-item d-flex justify-content-between">
+                      <a href="/user/profile/<%= user.id %>"  class=" text-danger text-decoration-none"><%= user.name %></a>
+         
+        </li>
+        <% } %>
+      </ul>
+    </div>
+    <% } %>  
+  </div>
+  <!-- Chat Box -->
+  <%  if(locals.user) { %>
+  <%- include('__chat.ejs') %>
+  <% } %>
+</div>

@@ -1,0 +1,86 @@
+<div id="chatBox" class="position-relative">
+  <div style="position: fixed; right: 50px; bottom: 50px">
+    <img
+      class="img-thumbnail"
+      src="/img/chat_img.png"
+      alt="..."
+      style="
+        width: 3rem;
+        height: 3rem;
+        box-shadow: 3px 3px 5px 2px lightblue;
+        border-radius: 10px;
+      "
+      data-bs-toggle="offcanvas"
+      data-bs-target="#offcanvasRight"
+      aria-controls="offcanvasRight"
+    />
+  </div>
+  <div
+    class="card offcanvas offcanvas-end p-1"
+    tabindex="-1"
+    id="offcanvasRight"
+    aria-labelledby="offcanvasRightLabel"
+  >
+    <div class="card-header offcanvas-header bg-primary">
+      <h5 id="offcanvasRightLabel" class="text-white">Chat Box</h5>
+      <button
+        type="button"
+        class="btn-close text-reset"
+        data-bs-dismiss="offcanvas"
+        aria-label="Close"
+      ></button>
+    </div>
+    <div
+      class="card-body offcanvas-body"
+      style="background-color: rgb(237, 207, 100)"
+    >
+      <ul
+        id="chat-messages-list"
+        class="border border-primary"
+        style="
+          list-style-type: none;
+          margin: 0px;
+          padding: 0px;
+          background-color: aliceblue;
+        "
+      ></ul>
+    </div>
+    <div
+      class="card-footer text-muted d-flex justify-content-evenly"
+      style="background-color: rgb(237, 207, 100)"
+    >
+      <div id="chat-message-input-container">
+        <textarea
+          style="background-color: azure"
+          class="btn rounded text-danger"
+          rows="1"
+          cols="25"
+          type="text"
+          id="chat-message-input"
+          placeholder="Enter your message here ..."
+        ></textarea>
+      </div>
+      <div>
+        <div class="btn-group dropup px-1">
+          <img
+            class="dropdown-toggle"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+            src="./img/share.png"
+            style="width: 25px; height: 25px; display: inline"
+          />
+          <ul class="dropdown-menu">
+            <li>
+              <button class="dropdown-item" id="share-location">
+                Share Location
+              </button>
+            </li>
+            <!-- <li><input type="file" onchange="handleFileSelect(event)" /></li>
+            <li><a class="dropdown-item" href="#">Menu item</a></li> -->
+          </ul>
+        </div>
+        <button id="send-message" class="btn btn-success">Send</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,30 @@
+#chat-messages-list {
+  border-radius: 5px;
+  border: 5px solid rebeccapurple;
+  height: 100%;
+  li {
+    color: rgb(83, 83, 152);
+  }
+  .other-message {
+    text-align: left;
+    padding: 5px;
+    /* border: 1px solid red; */
+    span {
+      display: inline-block;
+      padding: 5px;
+      border-radius: 3px;
+      background-color: antiquewhite;
+    }
+  }
+  .self-message {
+    /* border: 1px solid red; */
+    text-align: right;
+    padding: 5px;
+    span {
+      display: inline-block;
+      padding: 5px;
+      border-radius: 3px;
+      background-color: aquamarine;
+    }
+  }
+}

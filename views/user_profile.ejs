@@ -1,0 +1,105 @@
+<div id="user_info" class="row">
+  <div class="col-md-2 col-sm-auto">
+    <img
+      src="<%= profile_user.avatar %>"
+      alt="<%= user.name %>"
+      style="width: 150px; height: 200px"
+      class="img-thumbnail shadow"
+    />
+  </div>
+  <div class="col-md-10 col-sm-auto">
+    <p class="alert alert-info" style="color: #1a2d69">
+      <label>Name : </label> <%= profile_user.name %>
+    </p>
+    <p class="alert alert-info" style="color: #1a2d69">
+      <label>Email : </label> <%= profile_user.email %>
+    </p>
+    <% if (user.id!=profile_user.id) { %>
+    <span>
+      <a
+        href="/friendship/toggle/?id=<%= profile_user.id%>"
+        id="toggle_friendship"
+        class="btn btn-warning text-white"
+      >
+        <% if(friend) {%> Remove Friend <% } else { %> Add Friend <% } %>
+      </a>
+    </span>
+    <% }%>
+  </div>
+</div>
+<% if (user.id==profile_user.id) { %>
+<div class="mt-2 col-md-6 text-end">
+  <form
+    method="post"
+    action="/user/update/<%= profile_user.id %>"
+    enctype="multipart/form-data"
+    name="myform"
+  >
+    <div class="mb-1">
+      <input
+        type="text"
+        class="form-control"
+        id="exampleInputName"
+        name="name"
+        aria-describedby="nameHelp"
+        placeholder="Enter your name ... !"
+        required
+      />
+    </div>
+
+    <div class="mb-1">
+      <input
+        type="file"
+        class="form-control"
+        id="exampleInputImage"
+        name="avatar"
+        aria-describedby="imageHelp"
+        placeholder="Upload your image ... !"
+      />
+    </div>
+
+    <div class="mb-1">
+      <input
+        type="password"
+        class="form-control"
+        name="password"
+        id="exampleInputPassword"
+        placeholder="Enter your password ... !"
+        required
+      />
+    </div>
+
+    <div class="mb-1">
+      <input
+        type="password"
+        class="form-control"
+        name="confirm_password"
+        id="exampleInputConfirmPassword"
+        placeholder="Enter your password again ... !"
+        required
+      />
+    </div>
+    <button type="submit" onclick="return check()" class="btn btn-primary">
+      Update
+    </button>
+  </form>
+</div>
+<% } %>
+<script>
+  function check() {
+    // Show notification when password does not match
+    if (
+      document.myform.password.value != document.myform.confirm_password.value
+    ) {
+      new Noty({
+        layout: "topRight",
+        theme: "metroui",
+        type: "error",
+        text: "Passowords does not match !!!",
+        timeout: 1500,
+      }).show();
+      return false;
+    }
+    return true;
+  }
+</script>

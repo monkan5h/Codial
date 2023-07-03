@@ -1,0 +1,48 @@
+<div class="col-md-6">
+  <form method="post" action="/user/create">
+    <div class="mb-3">
+      <label for="exampleInputName" class="form-label">Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="exampleInputName"
+        name="name"
+        aria-describedby="nameHelp"
+      />
+    </div>
+
+    <div class="mb-3">
+      <label for="exampleInputEmail" class="form-label">Email address</label>
+      <input
+        type="email"
+        class="form-control"
+        id="exampleInputEmail"
+        name="email"
+        aria-describedby="emailHelp"
+      />
+    </div>
+
+    <div class="mb-3">
+      <label for="exampleInputPassword" class="form-label">Password</label>
+      <input
+        type="password"
+        class="form-control"
+        name="password"
+        id="exampleInputPassword"
+      />
+    </div>
+
+    <div class="mb-3">
+      <label for="exampleInputConfirmPassword" class="form-label"
+        >Confirm Password</label
+      >
+      <input
+        type="password"
+        class="form-control"
+        name="confirm_password"
+        id="exampleInputConfirmPassword"
+      />
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>

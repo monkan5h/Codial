@@ -1,0 +1,39 @@
+{
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "connect-flash": "^0.1.1",
+    "connect-mongo": "^5.0.0",
+    "cookie-parser": "^1.4.6",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "express-ejs-layouts": "^2.5.1",
+    "express-session": "^1.17.3",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^7.2.0",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
+    "nodemailer": "^6.9.2",
+    "npm-run-all": "^4.1.5",
+    "passport": "^0.5.2",
+    "passport-google-oauth": "^2.0.0",
+    "passport-jwt": "^4.0.1",
+    "passport-local": "^1.0.0",
+    "rotating-file-stream": "^3.1.0",
+    "sass": "^1.63.3",
+    "scss": "^0.2.4",
+    "socket.io": "^4.6.1"
+  },
+  "name": "codial",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "sass-watch": "sass --no-source-map --watch assets/scss/chat.scss assets/css/chat.css",
+    "dev_script": "nodemon app.js",
+    "start": "npm-run-all --parallel sass-watch dev_script",
+    "prod_script": "NODE_ENV=production nodemon app.js",
+    "prod_start": "npm-run-all --parallel sass-watch prod_script"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}

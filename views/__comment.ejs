@@ -1,0 +1,31 @@
+<li
+  class="list-group-item d-flex justify-content-between align-items-start"
+  id="comment-<%= comment._id %>"
+>
+  <div class="ms-2 me-auto">
+    <%= comment.content %>
+    <div class="fw-bold">-<%= comment.user.name %></div>
+  </div>
+  <% if( locals.user.id==post.user.id || locals.user.id==comment.user.id) { %>
+  <a
+    class="delete-comment-button btn btn-sm"
+    href="/comment/deleteComment/<%= comment.id %>/<%= post.id %>"
+    ><img src="./img/bin.png" style="width: 30px; height: 30px" />
+  </a>
+
+  <% } %> <% if( locals.user ) { %>
+  <a
+    class="toggle-like-button badge rounded-pill text-decoration-none ms-1"
+    style="vertical-align: top"
+    data-likes="<%= comment.likes.length %>"
+    href="/like/toggle/?id=<%= comment._id %>&type=comment"
+  >
+    <img src="./img/like.png" style="width: 30px; height: 30px" />
+    <sup class="text-danger"><%=comment.likes.length%></sup>
+  </a>
+
+  <% } else { %>
+  <img src="./img/like.png" style="width: 30px; height: 30px" />
+  <sup class="text-danger"><%=comment.likes.length%></sup>
+  <% } %>
+</li>
